@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: #f7f6f9;
+    height: 100vh;
+}
+
+.btn {
+    border: none;
+    cursor: pointer;
+    padding: .75rem 1rem;
+    border-radius: .25rem;
+}
+
+.btn-search {
+    background-color: #2c415c;
+    color: white;
+}
+
+.btn-location {
+    background-color: #7ed321;
+    color: white;
+}
+
+.page-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.sidebar {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: .5rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.page-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.city-form {
+    display: flex;
+    gap: .5rem;
+    flex-direction: column;
+}
+
+.city-form label {
+    font-weight: 700;
+}
+
+.city-form input {
+    padding: .5rem;
+    border-radius: .25rem;
+    border: 1px solid #ccc;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.separator::before,
+.separator::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background-color: #ccc;
+}
+
+.section-title {
+    margin-bottom: 1rem;
+}
+
+.weather-panel {
+    padding: 1rem;
+    border-radius: .25rem;
+    display: flex;
+    justify-content: space-between;
+    gap: .5rem;
+    align-items: center;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.weather-panel img {
+    width: 80px;
+}
+.weather-panel .date {
+    font-weight: 700;
+}
+
+.weather-details{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.weather-panel.today {
+    color: #fff;
+    background-color: #2c415c;
+}
+
+.weather-panel.forecast {
+    color: black;
+    background-color: #fff;
+}
+
+.weather-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1rem;
+}
+
+@media screen and (min-width: 760px) {
+    .page-container {
+        grid-template-columns: 360px 1fr;
+        height: 100%;
+    }
+}
