@@ -21,67 +21,66 @@ async function onCityFormSubmit(event) {
     displayLoading();
 
  try {
-        // Get city coordinates based on the city name
-        const cityCoordinates = await getCityCoordinates(cityName);
+       
+      const cityCoordinates = await getCityCoordinates(cityName);
     
-        if (cityCoordinates === null) {
-          // Hide loading text, display error message and exit the function
-          hideLoading();
-          displayError(`Nu s-au putut prelua coordonatele orasului ${cityName}`);
-          return;
-        }
+     if (cityCoordinates === null) {
+       hideLoading();
+       displayError(`Nu s-au putut prelua coordonatele orasului ${cityName}`);
+       return;
+    }
     
-  // Get weather based on latitude and longitude
+  
   const weatherResponse = await getWeather(
     cityCoordinates.lat,
     cityCoordinates.long
   );
 
-  // Parse and extract weather data from API response
+  
   const weatherData = parseApiData(weatherResponse);
 
-  // Hide loading text
+  
   hideLoading();
 
-  // Display weather data in the user interface (UI)
+  
   displayWeather(cityName, weatherData);
 
-  // Clear the value from city input
+ 
   cityInput.value = '';
 } catch (error) {
-  // Hide loading text and display error message
+  
   hideLoading();
   displayError(`A aparut o eroare ${error}`);
 }
 }
 
 function onLocationBtnClick() {
-// Clear HTML content added in "page-content"
+
 clearContent();
 
 if (navigator.geolocation) {
-  // Get the current position using the browser geolocation
+  
   navigator.geolocation.getCurrentPosition(async (position) => {
-    // Display loading text
+   
     displayLoading();
 
     try {
-      // Get weather based on latitude and longitude
+      
       const weatherResponse = await getWeather(
         position.coords.latitude,
         position.coords.longitude
       );
 
-      // Parse and extract weather data from API response
+      
       const weatherData = parseApiData(weatherResponse);
 
-      // Hide loading text
+     
       hideLoading();
 
-      // Display weather data in the user interface (UI)
+      
       displayWeather('locatia ta', weatherData);
     } catch (error) {
-      // Hide loading text and display error message
+      
       hideLoading();
       displayError(`A aparut o eroare ${error}`);
     }
@@ -100,11 +99,11 @@ const response = await fetch(apiUrl.toString());
 const data = await response.json();
 
 if (!data || !data.hasOwnProperty('results')) {
-  // coordinates for the city name cannot be retrieved
+  
   return null;
 }
 
-// extract latitude and longitude from the first item
+
 const result = data.results[0];
 return { lat: result.latitude, long: result.longitude };
 }
@@ -141,7 +140,7 @@ for (let i = 0; i < numberOfItems; i++) {
     currentDatetime.getHours() === itemDatetime.getHours();
 
   if (isToday && isCurrentHour) {
-    // weather data for the current day and hour
+   
     currentWeather = {
       date: data.hourly.time[i],
       temp: data.hourly.temperature_2m[i],
@@ -150,7 +149,7 @@ for (let i = 0; i < numberOfItems; i++) {
       code: data.hourly.weather_code[i],
     };
   } else if (isCurrentHour) {
-    // weather data for the next days and the current hour
+   
     forecasts.push({
       date: data.hourly.time[i],
       temp: data.hourly.temperature_2m[i],
@@ -170,10 +169,10 @@ return {
 function displayWeather(cityName, weather) {
 const pageContent = document.querySelector('.page-content');
 
-// create the panel with weather data for the current day and hour
+
 pageContent.append(createTodayWeatherSection(cityName, weather.current));
 
-// create the panels with weather data for the next days and current hour
+
 pageContent.append(createForecastWeatherSection(cityName, weather.forecasts));
 }
 
